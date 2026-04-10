@@ -29,7 +29,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/roadmap"
+            href="/feedback"
             className="text-sm hover:text-primary flex items-center gap-1"
           >
             <MessageSquare className="h-4 w-4" /> Feedback

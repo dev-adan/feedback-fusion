@@ -43,7 +43,7 @@ model Post {
 
 model Vote {
   id Int @id @default(autoincrement())
-  userId Int
+  userId Int @unique
   postId Int
   user User @relation(fields : [userId], references: [id])
   post Post @relation(fields : [postId], references: [id])

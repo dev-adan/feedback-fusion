@@ -1,11 +1,22 @@
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+
 export default function Home() {
   return (
     <div className="space-y-8">
-      <section className="text-center space-y-4 py-12">
+      <section className="text-center space-y-6 py-12">
         <h1 className="text-4xl font-bold text-foreground">Welcome to Feedback Fusion</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           A platform for users to suggest and vote on features. Help shape the future of our product.
         </p>
+        <div className="flex gap-4 justify-center pt-4">
+          <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
+            <Link href="/feedback/new">Submit Feedback</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link href="/roadmap">View Roadmap</Link>
+          </Button>
+        </div>
       </section>
       
       <section className="grid md:grid-cols-3 gap-6">
