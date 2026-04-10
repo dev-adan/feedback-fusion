@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id Int @id @default(autoincrement())
+  clerkUserId String
+  email String @unique
+  name String?
+  image String?
+  posts Post[]
+  votes Vote[]
+  role  Role @default(USER)
+
+  @@map("users")
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  description String?
+  category String
+  status PostStatus @default(under_review)
+  authorId Int
+  author User @relation(fields : [authorId], references: [id])
+  votes Vote[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+    @@map("posts")
+}
+
+model Vote {
+  id Int @id @default(autoincrement())
+  userId Int
+  postId Int
+  user User @relation(fields : [userId], references: [id])
+  post Post @relation(fields : [postId], references: [id])
+
+  @@unique([userId, postId])
+  @@map("votes")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum PostStatus {
+  under_review
+  planned
+  in_progress
+  completed
+}
